@@ -36,17 +36,17 @@ const commentCreateCtrl = async(req, res, next) =>{
     }
 };
 
-const commnetDeleteCtrl =  async(req,res) =>{
-    try {
-        res.json({
-            status: "Success",
-            data: "Delete comment route"
-        });
-    }
-    catch (error){
-        res.json(error.message);
-    }
-};
+// const commnetDeleteCtrl =  async(req,res) =>{
+//     try {
+//         res.json({
+//             status: "Success",
+//             data: "Delete comment route"
+//         });
+//     }
+//     catch (error){
+//         res.json(error.message);
+//     }
+// };
 
 //Update
 const commentUpdateCtrl = async(req, res, next) =>{
@@ -99,6 +99,6 @@ const deleteCommentCtrl = async(req, res, next) =>{
 module.exports = {
     commentCreateCtrl,
     deleteCommentCtrl,
-    commnetDeleteCtrl,
+    // commnetDeleteCtrl,
     commentUpdateCtrl,
 }

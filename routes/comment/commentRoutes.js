@@ -1,6 +1,6 @@
 const express = require("express");
 const { commentCreateCtrl, deleteCommentCtrl } = require("../../controller/comments/commentCtrl")
-const { commnetDeleteCtrl, commentUpdateCtrl } = require("../../controller/comments/commentCtrl");
+const { commentUpdateCtrl } = require("../../controller/comments/commentCtrl");
 const isLogin = require("../../middlewares/isLogIn");
 const commentRouter = express.Router();
 
