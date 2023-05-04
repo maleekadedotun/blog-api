@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const commentSchema = new comment.Schema(
+const commentSchema = new mongoose.Schema(
     {
         post: {
             type: mongoose.Schema.Types.ObjectId,
@@ -20,6 +20,6 @@ const commentSchema = new comment.Schema(
     {timeStamps: true}
 );
 
-const comment = mongoose.model("Comment",commentSchema);
+const Comment = mongoose.model("Comment",commentSchema);
 
-module.exports = comment
+module.exports = Comment

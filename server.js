@@ -5,11 +5,13 @@ const commentRouter = require("./routes/comment/commentRoutes");
 const categoryRouter = require("./routes/categories/categoryRoutes");
 const config = require("./config1/dbConnect.js");
 const globalErrorhandler = require("./middlewares/globalErrorHandler");
+const isAdmin = require("./middlewares/isAdmin");
 
 const app = express();
 
 // middlewears
 app.use(express.json()); // pass incoming payload
+
 const userAuth = {
     isLogin: true,
     isAdmin: false,
@@ -25,12 +27,13 @@ app.use((req, res, next) => {
     }
 })
 //routes
+//  app.use(isAdmin);
 
 //users routes
-app.use("/api/v1/users/", userRouter)
+app.use("/api/v1/users/", userRouter);
 
 //posts routes
-app.use("/api/v1/posts/", postRouter)
+app.use("/api/v1/posts/", postRouter);
 
 //comments routes
 app.use("/api/v1/comments", commentRouter);

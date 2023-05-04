@@ -1,22 +1,30 @@
+const Category = require("../../model/Category/category");
+const{ appErr, AppErr} = require("../../utilis/appError");
+
+
 // Create
-const categoryCreateCtrl = async(req,res) =>{
+const categoryCreateCtrl = async(req, res, next) =>{
+    const {title} = req.body;
     try {
+        const category = await Category.create({title, user: req.userAuth});
         res.json({
             status: "Success",
-            data: "Category created"
+            data: category,
         });
     }
     catch (error){
-        res.json(error.message);
+        return next(appErr(error.message))
     }
 };
 
 // All
 const allCategoryCtrl = async(req,res) =>{
     try {
+        const categories = await Category.find();
+
         res.json({
             status: "Success",
-            data: "Category route"
+            data: categories,
         });
     }
     catch (error){
@@ -24,12 +32,15 @@ const allCategoryCtrl = async(req,res) =>{
     }
 };
 
-// Delete
-const deleteCategoryCtrl = async(req,res) =>{
+
+// Single
+const singleCategoryCtrl = async(req,res) =>{
     try {
+        const category = await Category.findById(req.params.id);
+
         res.json({
             status: "Success",
-            data: "Delete categories route"
+            data: category,
         });
     }
     catch (error){
@@ -39,10 +50,16 @@ const deleteCategoryCtrl = async(req,res) =>{
 
 // Update
 const UpdatecategoryCtrl = async(req, res) =>{
+    const {title} = req.body;
     try {
+        const category = await Category.findByIdAndUpdate(
+            req.params.id,
+            {title},
+            {new: true, runValidators: true,}
+             )
         res.json({
             status: "Success",
-            data: "Update category route"
+            data: category,
         });
     }
     catch (error){
@@ -50,9 +67,27 @@ const UpdatecategoryCtrl = async(req, res) =>{
     }
 }
 
+// Delete
+const deleteCategoryCtrl = async(req,res) =>{
+  
+    try {
+        await Category.findByIdAndDelete(req.params.id)
+        res.json({
+            status: "Success",
+            data: "Category deleted successfully"
+        });
+    }
+    catch (error){
+        res.json(error.message);
+    }
+};
+
+
+
 module.exports = {
     categoryCreateCtrl,
     allCategoryCtrl,
     deleteCategoryCtrl,
     UpdatecategoryCtrl,
+    singleCategoryCtrl,
 }

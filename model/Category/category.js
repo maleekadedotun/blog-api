@@ -1,25 +1,22 @@
 const mongoose = require("mongoose");
 
-const categorySchema = new category.Schema(
+const categorySchema = new mongoose.Schema(
     {
-        post: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Post",
-            required: [true, "Post is required"],
-        },
+        
         user: {
-            type: Object,
-            required: [true, "User is required"],
+            type: String,
+            ref: "User",
+            required: true,
         },
-        description: {
+       title: {
             type: Object,
-            required: [true, "Comment description is required"],
+            required: true, 
         },
 
     },
-    {timeStamps: true}
+    {timestamps: true}
 );
 
-const category = mongoose.model("Category",categorySchema);
+const Category = mongoose.model("Category",categorySchema);
 
-module.exports = category
+module.exports = Category;
