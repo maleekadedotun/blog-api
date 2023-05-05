@@ -6,8 +6,23 @@ const categoryRouter = require("./routes/categories/categoryRoutes");
 const config = require("./config1/dbConnect.js");
 const globalErrorhandler = require("./middlewares/globalErrorHandler");
 const isAdmin = require("./middlewares/isAdmin");
+const Post = require("./model/Post/post");
+
 
 const app = express();
+
+app.get("/", async(req, res) => {
+    const posts = await Post.find()
+    try{
+        res.json({
+            status: "Success",
+            data: posts
+        })
+    }
+    catch (error) {
+        res.json(error)
+    }
+})
 
 // middlewears
 app.use(express.json()); // pass incoming payload
