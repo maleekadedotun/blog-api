@@ -43,7 +43,7 @@ app.get("/users", async(req, res) => {
 })
 
 // Categories
-app.get("/users", async(req, res) => {
+app.get("/categories", async(req, res) => {
     const categories = await Category.find()
     try{
         res.json({
@@ -57,7 +57,7 @@ app.get("/users", async(req, res) => {
 });
 
 // Comment
-app.get("/users", async(req, res) => {
+app.get("/comments", async(req, res) => {
     const comments = await Comment.find()
     try{
         res.json({
