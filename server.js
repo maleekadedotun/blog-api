@@ -8,11 +8,13 @@ const globalErrorhandler = require("./middlewares/globalErrorHandler");
 const isAdmin = require("./middlewares/isAdmin");
 const Post = require("./model/Post/post");
 const User = require("./model/User/user");
+const Category = require("./model/Category/category");
+const Comment = require("./model/Comment/comment");
 
 
 
 const app = express();
-
+// Posts
 app.get("/", async(req, res) => {
     const posts = await Post.find()
     try{
@@ -26,6 +28,7 @@ app.get("/", async(req, res) => {
     }
 })
 
+// Users
 app.get("/users", async(req, res) => {
     const users = await User.find()
     try{
@@ -38,6 +41,36 @@ app.get("/users", async(req, res) => {
         res.json(error)
     }
 })
+
+// Categories
+app.get("/users", async(req, res) => {
+    const categories = await Category.find()
+    try{
+        res.json({
+            status: "Success",
+            data: categories
+        })
+    }
+    catch (error) {
+        res.json(error)
+    }
+});
+
+// Comment
+app.get("/users", async(req, res) => {
+    const comments = await Comment.find()
+    try{
+        res.json({
+            status: "Success",
+            data: comments
+        })
+    }
+    catch (error) {
+        res.json(error)
+    }
+})
+
+
 
 // middlewears
 app.use(express.json()); // pass incoming payload
