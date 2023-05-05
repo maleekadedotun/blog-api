@@ -7,6 +7,8 @@ const config = require("./config1/dbConnect.js");
 const globalErrorhandler = require("./middlewares/globalErrorHandler");
 const isAdmin = require("./middlewares/isAdmin");
 const Post = require("./model/Post/post");
+const User = require("./model/User/user");
+
 
 
 const app = express();
@@ -17,6 +19,19 @@ app.get("/", async(req, res) => {
         res.json({
             status: "Success",
             data: posts
+        })
+    }
+    catch (error) {
+        res.json(error)
+    }
+})
+
+app.get("/users", async(req, res) => {
+    const users = await User.find()
+    try{
+        res.json({
+            status: "Success",
+            data: users
         })
     }
     catch (error) {
